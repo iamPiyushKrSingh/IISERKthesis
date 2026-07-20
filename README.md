@@ -1,6 +1,6 @@
 # IISER Kolkata MS Thesis Template
 
-A modern, elegant, and fully-featured LaTeX template designed for MS and PhD theses at the Indian Institute of Science Education and Research (IISER) Kolkata. 
+A modern, elegant, and fully-featured LaTeX template designed for MS and PhD theses at the Indian Institute of Science Education and Research (IISER) Kolkata.
 
 This template is meticulously optimized for physics and mathematics formatting but is flexible enough for any department.
 
@@ -25,14 +25,16 @@ This template is meticulously optimized for physics and mathematics formatting b
 This template relies on `biber` for bibliography management and `minted` for code blocks (which requires the `-shell-escape` flag).
 
 ### Using `latexmk` (Recommended)
+
 A customized `.latexmkrc` is included in the directory. You can simply run:
+
 ```bash
 latexmk main.tex
 ```
+
 This will automatically handle `pdflatex`, `biber`, and multiple compilation passes, outputting all auxiliary "cruft" files into a hidden `.build_tex/` folder to keep your root directory clean.
 
-### Using VSCode (LaTeX Workshop)
-If you use VSCode, a `.vscode/settings.json` is provided. It automatically configures `latexindent` to output its logs into the `.build_tex/` directory so your workspace remains tidy.
+For example, look the [pdf](https://raw.githubusercontent.com/iamPiyushKrSingh/IISERKthesis/main/main.pdf) output.
 
 ## 🎛 Class Options
 
@@ -44,6 +46,7 @@ You can toggle the automatic frontmatter lists directly in `main.tex` by adding 
 ```
 
 **Available Toggles:**
+
 - `notodo`: Completely disables the `todonotes` package and removes the Todo List. (Use this for your final submission!)
 - `nolof`: Removes the List of Figures.
 - `nolot`: Removes the List of Tables.
@@ -64,4 +67,5 @@ You can toggle the automatic frontmatter lists directly in `main.tex` by adding 
 ```
 
 ## 📝 License
+
 Feel free to fork, modify, and use this template for your own thesis!
