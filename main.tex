@@ -1,0 +1,63 @@
+\documentclass[]{IISERKthesis}
+\usepackage{IISERKphysics}
+
+\title{Your Thesis Title Here}
+\author{Your Name}
+\rollno{12MS345}
+\program{5th Year BS-MS}
+\department{Department of Physical Sciences}
+\institute{Indian Institute of Science Education and Research Kolkata, India}
+\place{IISER Kolkata, Mohanpur}
+% \date{16th May, 2024}
+
+\supervisor{Prof. Supervisor Name}
+\supervisoraffiliation{Indian Institute of Science Education and Research Kolkata, India}
+
+\cosupervisor{Prof. Co-Supervisor Name}
+\cosupervisoraffiliation{Affiliation}
+
+\coordinator{Prof. Coordinator Name}
+\coordinatoraffiliation{Indian Institute of Science Education and Research Kolkata, India}
+
+\addbibresource{references.bib}
+
+% PDF Metadata
+\makeatletter
+\hypersetup{
+    pdftitle={\@title},
+    pdfauthor={\@author},
+    pdfsubject={Master's Thesis},
+    pdfkeywords={IISER Kolkata, Master's Thesis, Physics}
+}
+\makeatother
+\begin{document}
+
+% Frontmatter
+\frontmatter
+\maketitle
+
+\input{frontmatter/declaration}
+
+\input{frontmatter/certificate}
+
+\input{frontmatter/acknowledgements}
+
+\makefrontlists
+
+\input{frontmatter/abstract}
+
+% Mainmatter
+\mainmatter
+
+\include{chapters/01_introduction}
+
+\include{chapters/02_chapter}
+
+% Appendices
+\appendix
+\include{appendices/A_example}
+
+\backmatter
+\printbibliography[heading=bibintoc]
+
+\end{document}

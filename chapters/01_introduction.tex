@@ -1,0 +1,79 @@
+\chapter{Introduction}
+
+This document serves as a comprehensive showcase of the features available in this thesis template. It demonstrates how to effectively utilize the custom environments, packages, and structural macros provided.
+\todo{This is a margin note. It automatically fits the page margin.}
+
+\section{Mathematics and Physics}
+The \texttt{IISERKphysics.sty} package automatically loads essential mathematical and physical typesetting tools.
+For example, you can seamlessly use the \texttt{physics} package for bra-ket notation and derivatives:
+\begin{equation}
+    \hat{H} \ket{\Psi} = i\hbar \pdv{t} \ket{\Psi}
+\end{equation}
+You can also easily define custom symbols for your nomenclature. For example, consider the speed of light $c$.
+\nomenclature{$c$}{Speed of light in a vacuum}
+\nomenclature{$\ket{\Psi}$}{Quantum state vector}
+
+\section{Theorem Environments}
+We have implemented beautifully styled theorem environments using \texttt{tcolorbox}. These are perfectly integrated with \texttt{cleveref}. \todo[inline, color=green!40]{This is an inline todo note, useful for longer comments.}
+
+\begin{theorem}{No-Hair Theorem}{nohair}
+    Stationary black holes are characterized entirely by mass $M$, charge $Q$, and angular momentum $J$.
+\end{theorem}
+
+\begin{lemma}{}{}
+    This is a lemma without a title. Notice how the numbering follows the theorem counter.
+\end{lemma}
+
+\begin{definition}{Event Horizon}{horizon}
+    The boundary defining the region of space from which nothing can escape.
+\end{definition}
+
+\begin{remark}{Historical Note}{hist}
+    The term was popularized by John Wheeler in 1967.
+\end{remark}
+
+As demonstrated, you can cross-reference these dynamically using \texttt{\textbackslash cref\{\}}: \cref{thm:nohair,def:horizon}.
+
+\section{Code Listings}
+The template uses \texttt{minted} for professional, syntax-highlighted code blocks. Line numbers are rendered uncopyable so readers can easily copy the code.
+
+\begin{listing}[htpb]
+    \begin{minted}{python}
+import numpy as np
+
+def calculate_energy(mass):
+    """Calculates rest energy E = mc^2"""
+    c = 299792458 # m/s
+    return mass * c**2
+\end{minted}
+    \caption{A simple Python script demonstrating the \texttt{minted} configuration.}
+    \label{lst:python}
+\end{listing}
+
+\section{Figures and Tables}
+Floating environments are handled standardly, but their styling has been optimized for the template.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.3\textwidth]{images/logos/IISERKlogo.png}
+    \caption{The official logo of IISER Kolkata.}
+    \label{fig:logo}
+\end{figure}
+
+\begin{table}[htpb]
+    \centering
+    \begin{tabular}{llc}
+        \hline
+        \textbf{Constant} & \textbf{Symbol} & \textbf{Value}                   \\
+        \hline
+        Speed of light    & $c$             & $2.99 \times 10^8$ m/s           \\
+        Planck constant   & $h$             & $6.62 \times 10^{-34}$ J$\cdot$s \\
+        \hline
+    \end{tabular}
+    \caption{Example table of physical constants.}
+    \label{tab:constants}
+\end{table}
+
+\section{Citations}
+The template utilizes \texttt{biblatex} with the Biber backend. It is configured to automatically parse arXiv and DOI links.
+You can use standard citations \parencite{hawking1971} or text citations where the author's name becomes the clickable link, such as \textcite{einstein1915}.

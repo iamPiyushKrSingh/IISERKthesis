@@ -1,0 +1,140 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{IISERKphysics}[2026/07/19 Extra math and physics packages for IISER Kolkata Thesis]
+
+% =====================================================================
+% --- MATH & PHYSICS PACKAGES ---
+% =====================================================================
+\RequirePackage{amsmath, amssymb, amsthm, mathtools} % Core math packages
+\RequirePackage{physics}        % Dirac notation and derivatives
+\RequirePackage{slashed}        % Feynman slash notation
+\RequirePackage{tensor}         % Tensor indices
+
+% =====================================================================
+% --- UTILITY PACKAGES ---
+% =====================================================================
+\RequirePackage{microtype}      % Improves character and word spacing
+% =====================================================================
+% --- BIBLIOGRAPHY (BIBLATEX & BIBER) ---
+% =====================================================================
+\RequirePackage[
+  backend=biber,
+  citestyle=authoryear,
+  bibstyle=numeric,
+  sorting=none,
+  url=false,
+  isbn=false,
+  eprint=true
+]{biblatex}
+
+% Make the \textcite Author and Year clickable links, but keep () normal
+\DeclareCiteCommand{\textcite}
+{\usebibmacro{prenote}}
+{%
+  \printtext[bibhyperref]{\printnames{labelname}}%
+  \setunit{\addspace}%
+  \printtext[parens]{\printtext[bibhyperref]{\printfield{year}}}%
+}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+
+% Add proper spacing between bibliography entries
+\setlength{\bibitemsep}{0.5\baselineskip}
+
+% =====================================================================
+% --- CODE BLOCKS (MINTED) ---
+% =====================================================================
+\definecolor{mintedbg}{gray}{0.97}
+\RequirePackage[chapter]{minted}       % For modern, powerful code blocks
+\usemintedstyle{vs}                    % Minimalist, academic style with subtle colors (Visual Studio style)
+
+\setminted{
+  fontsize=\small,
+  breaklines=true,
+  linenos=true,
+  frame=leftline,
+  framerule=1pt,
+  rulecolor=black!40,
+  numbersep=10pt,
+  bgcolor=mintedbg,
+  xleftmargin=5pt
+}
+
+% Prevent line numbers from being copied (requires accsupp package)
+\RequirePackage{accsupp}
+\renewcommand{\theFancyVerbLine}{%
+  \BeginAccSupp{method=escape,ActualText={}}%
+  \sffamily\tiny\color{black!50}\arabic{FancyVerbLine}%
+  \EndAccSupp{}%
+}
+
+% Rename the List of Listings title to match our standard
+\renewcommand{\listoflistingscaption}{List of Listings}
+
+
+
+% =====================================================================
+% --- THEOREMS AND DEFINITIONS (TCOLORBOX) ---
+% =====================================================================
+\RequirePackage{tcolorbox}
+\tcbuselibrary{skins, breakable, theorems}
+\RequirePackage[nameinlink,noabbrev]{cleveref}
+
+% 2. Create a master style to mimic the amsthm inline look
+\tcbset{
+  sleekbase/.style 2 args={
+      enhanced,
+      breakable,
+      frame hidden,
+      boxrule=0pt,
+      borderline west={2pt}{0pt}{#1},
+      colback=#1!3!white,        % Colors the main body background
+      colbacktitle=#1!3!white,   % Colors the title background identically
+      titlerule=0pt,             % Removes the invisible dividing line
+      toptitle=4pt,              % Padding above the title
+      bottomtitle=0pt,           % Pulls the title closer to the body text
+      sharp corners,
+      left=4pt, right=4pt, top=4pt, bottom=4pt,
+      % before skip=12pt, after skip=12pt,
+      coltitle=black,
+      fonttitle=\bfseries,
+      description font=\normalfont,
+      description delimiters={(}{)},
+      separator sign={.},
+      % Body font passed as the second argument
+      fontupper=#2,
+    }
+}
+
+% 3. Define the environments
+
+% Theorems, Lemmas, Corollaries, Propositions (Blue, Italic body)
+\newtcbtheorem[number within=chapter, crefname={theorem}{theorems}, Crefname={Theorem}{Theorems}]
+{theorem}{Theorem}{sleekbase={blue!70!black}{\itshape}}{thm}
+
+\newtcbtheorem[use counter from=theorem, crefname={lemma}{lemmas}, Crefname={Lemma}{Lemmas}]
+{lemma}{Lemma}{sleekbase={blue!70!black}{\itshape}}{lem}
+
+\newtcbtheorem[use counter from=theorem, crefname={corollary}{corollaries}, Crefname={Corollary}{Corollaries}]
+{corollary}{Corollary}{sleekbase={blue!70!black}{\itshape}}{cor}
+
+\newtcbtheorem[use counter from=theorem, crefname={proposition}{propositions}, Crefname={Proposition}{Propositions}]
+{proposition}{Proposition}{sleekbase={blue!70!black}{\itshape}}{prop}
+
+% Definitions & Examples (Green, Normal body)
+\newtcbtheorem[use counter from=theorem, crefname={definition}{definitions}, Crefname={Definition}{Definitions}]
+{definition}{Definition}{sleekbase={green!60!black}{\normalfont}}{def}
+
+\newtcbtheorem[use counter from=theorem, crefname={example}{examples}, Crefname={Example}{Examples}]
+{example}{Example}{sleekbase={green!60!black}{\normalfont}}{ex}
+
+% Remarks (Gray, Normal body, Italic title - overrides fonttitle)
+\newtcbtheorem[use counter from=theorem, crefname={remark}{remarks}, Crefname={Remark}{Remarks}]
+{remark}{Remark}{
+  sleekbase={gray!60!black}{\normalfont},
+  fonttitle=\itshape
+}{rem}
+
+
+
+
+\endinput
