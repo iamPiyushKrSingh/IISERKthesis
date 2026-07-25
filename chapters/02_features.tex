@@ -1,0 +1,67 @@
+\chapter{Features and Customization}
+\label{ch:features}
+
+This chapter highlights the advanced typographical features and custom environments built into the \texttt{IISERKphysics.sty} package.
+
+\section{Font Customization}
+You can easily switch out the document fonts by using the font macros in \texttt{main.tex}. These macros take an optional LaTeX package name and a styling command.
+\begin{minted}{latex}
+% Example: Use 'tgheros' for sans-serif headings, 'tgtermes' for Times main text
+\TitleFont[tgheros]{\sffamily}
+\TextFont[tgtermes]{\rmfamily}
+\MathFont{newtxmath}
+\end{minted}
+If you leave these commented out, the template elegantly defaults to Garamond.
+
+\section{Theorem Environments}
+We provide beautifully styled theorem environments powered by \texttt{tcolorbox}. These boxes are fully integrated with \texttt{cleveref} for smart cross-referencing.
+
+\begin{theorem}{No-Hair Theorem}{nohair}
+    Stationary black holes are characterized entirely by mass $M$, charge $Q$, and angular momentum $J$.
+\end{theorem}
+
+\begin{lemma}{}{}
+    This is a lemma without a title. Notice how the numbering follows the theorem counter chapter-wise.
+\end{lemma}
+
+\begin{definition}{Event Horizon}{horizon}
+    The boundary defining the region of space from which nothing can escape.
+\end{definition}
+
+\begin{remark}{Historical Note}{hist}
+    The term was popularized by John Wheeler in 1967.
+\end{remark}
+
+You can reference these dynamically using \texttt{\textbackslash cref\{\}}: \cref{thm:nohair} and \cref{def:horizon}.
+
+\section{Mathematics and Physics}
+Essential math packages like \texttt{amsmath}, \texttt{mathtools}, \texttt{slashed}, and \texttt{tensor} are pre-loaded. The \texttt{physics} package provides excellent shorthand for bra-ket notation and derivatives:
+\begin{equation}
+    \hat{H} \ket{\Psi} = i\hbar \pdv{t} \ket{\Psi}
+\end{equation}
+
+You can also log symbols to the Nomenclature automatically. For instance, consider the speed of light $c$.
+\nomenclature{$c$}{Speed of light in a vacuum}
+\nomenclature{$\ket{\Psi}$}{Quantum state vector}
+
+\section{Code Listings}
+The template utilizes \texttt{minted} for professional code blocks. Crucially, we use the \texttt{accsupp} package to render line numbers uncopyable, so readers can effortlessly copy your code from the PDF without grabbing the line numbers.
+
+\begin{listing}[htpb]
+\begin{minted}{python}
+import numpy as np
+
+def calculate_energy(mass):
+    """Calculates rest energy E = mc^2"""
+    c = 299792458 # m/s
+    return mass * c**2
+\end{minted}
+    \caption{A simple Python script demonstrating the \texttt{minted} configuration.}
+    \label{lst:python}
+\end{listing}
+
+\section{To-Do Notes}
+As you draft your thesis, you can leave yourself notes using the \texttt{\textbackslash todo\{\}} command. 
+\todo{This is a margin note. It automatically fits the page margin.}
+\todo[inline, color=green!40]{This is an inline todo note, useful for longer comments or reminders inside the text body.}
+These notes compile into a handy index at the front of the document. When you are ready to finalize your thesis, simply add the \texttt{notodo} class option (see \cref{sec:class_options}) to hide all notes and the list simultaneously.

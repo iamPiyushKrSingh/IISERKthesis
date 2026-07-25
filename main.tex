@@ -1,6 +1,12 @@
 \documentclass[]{IISERKthesis}
 \usepackage{IISERKphysics}
 
+% --- FONT CUSTOMIZATION ---
+% A working example of customizing fonts. The default is Garamond.
+\TitleFont[tgheros]{\sffamily} % Loads font package (optional) and sets font family/shape for headings
+\TextFont{\rmfamily} % Loads a text font package (optional) and sets font family/shape for main text
+\MathFont{newtxmath}           % Loads a math font package
+
 \title{Your Thesis Title Here}
 \author{Your Name}
 \rollno{12MS345}
@@ -49,9 +55,9 @@
 % Mainmatter
 \mainmatter
 
-\include{chapters/01_introduction}
+\include{chapters/01_getting_started}
 
-\include{chapters/02_chapter}
+\include{chapters/02_features}
 
 % Appendices
 \appendix

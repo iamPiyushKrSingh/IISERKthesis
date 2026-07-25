@@ -78,7 +78,6 @@
 % --- REQUIRED PACKAGES ---
 % =====================================================================
 \RequirePackage[T1]{fontenc}
-\RequirePackage{ebgaramond}     % Garamond font as requested
 \RequirePackage{geometry}       % Page margin definitions
 \RequirePackage{graphicx}       % For including logos and images
 \RequirePackage{setspace}       % For line spacing (onehalfspacing)
@@ -141,6 +140,40 @@
 % =====================================================================
 % --- FONTS & TYPOGRAPHY ---
 % =====================================================================
+% Allow user to customize fonts (TitleFont, NormalFont, MathFont)
+\newcommand{\@titlefontpackage}{}
+\newcommand{\@titlefont}{}
+\newcommand{\TitleFont}[2][]{%
+    \renewcommand{\@titlefontpackage}{#1}%
+    \renewcommand{\@titlefont}{#2}%
+}
+
+\newcommand{\@textfontpackage}{ebgaramond} % Default text font package
+\newcommand{\@textfontstyle}{}
+\newcommand{\TextFont}[2][]{%
+    \renewcommand{\@textfontpackage}{#1}%
+    \renewcommand{\@textfontstyle}{#2}%
+}
+
+\newcommand{\@mathfont}{} % Default math font package
+\newcommand{\MathFont}[1]{\renewcommand{\@mathfont}{#1}}
+
+\AtEndPreamble{
+    \ifx\@titlefontpackage\@empty\else
+        \RequirePackage{\@titlefontpackage}
+    \fi
+    \ifx\@textfontpackage\@empty\else
+        \RequirePackage{\@textfontpackage}
+    \fi
+    \ifx\@mathfont\@empty\else
+        \RequirePackage{\@mathfont}
+    \fi
+}
+
+\AtBeginDocument{
+    \@textfontstyle
+}
+
 % Set paragraph spacing and line spacing
 \onehalfspacing
 \setlength{\parindent}{1.5em}
@@ -190,7 +223,7 @@
 % =====================================================================
 % Format for numbered chapters
 \titleformat{\chapter}[display]
-  {\normalfont\Huge\bfseries\raggedleft}
+  {\normalfont\@titlefont\Huge\bfseries\raggedleft}
   {\fontsize{100}{110}\selectfont\color{chapgray}\thechapter}
   {-30pt}
   {\Huge #1}
@@ -198,7 +231,7 @@
 
 % Format for unnumbered chapters (like Abstract, Acknowledgements)
 \titleformat{name=\chapter,numberless}[block]
-  {\normalfont\Huge\bfseries\centering}
+  {\normalfont\@titlefont\Huge\bfseries\centering}
   {}
   {0pt}
   {\Huge #1}
@@ -213,7 +246,7 @@
 
 % Format for sections
 \titleformat{\section}[block]
-  {\titlerule\normalfont\Large\bfseries}
+  {\titlerule\normalfont\@titlefont\Large\bfseries}
   {\thesection}
   {1em}
   {#1}
@@ -221,7 +254,7 @@
 
 % Format for subsections
 \titleformat{\subsection}
-  {\normalfont\large\bfseries}{\thesubsection}{1em}{#1}
+  {\normalfont\@titlefont\large\bfseries}{\thesubsection}{1em}{#1}
 
 % =====================================================================
 % --- METADATA VARIABLES (TITLE PAGE INFO) ---
@@ -265,6 +298,7 @@
 % =====================================================================
 \renewcommand{\maketitle}{
     \begin{titlepage}
+        \@titlefont
         \begin{center}
             % Shift the whole title page up slightly
             \vspace*{-2cm}

@@ -53,6 +53,16 @@ You can toggle the automatic frontmatter lists directly in `main.tex` by adding 
 - `nolol`: Removes the List of Listings.
 - `nonom`: Removes the Nomenclature (List of Symbols).
 
+## 🖋 Font Customization
+
+You can easily customize the fonts used in your thesis directly in `main.tex` using the following commands:
+
+- `\TitleFont[<package>]{<command>}`: Changes the font for the title page and chapter/section headings. It optionally accepts a LaTeX font package to load, followed by the font shape/family command to apply. Examples: `\TitleFont{\sffamily}` (just applies sans-serif) or `\TitleFont[tgheros]{\sffamily}` (loads the tgheros package and applies sans-serif).
+- `\TextFont[<package>]{<command>}`: Changes the main text font of the document. Like `\TitleFont`, it accepts an optional font package and a font styling command. The default package is `ebgaramond`. Examples: `\TextFont[tgtermes]{\rmfamily}` or `\TextFont[mathpazo]{}`.
+- `\MathFont{<package>}`: Changes the font used for math equations. This command also **loads a LaTeX font package**. Example: `\MathFont{newtxmath}`.
+
+*Note: If you leave `\TextFont` or `\MathFont` commented out or empty, it will fall back to the template's default settings (Garamond for text).*
+
 ## 📁 Repository Structure
 
 ```text

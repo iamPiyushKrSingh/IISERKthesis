@@ -1,0 +1,53 @@
+\chapter{Getting Started}
+\label{ch:getting_started}
+
+Welcome to the IISER Kolkata MS and PhD thesis template. This document serves as the official documentation, demonstrating how to use the template effectively to produce a beautiful, correctly formatted thesis.
+
+\section{Project Structure}
+The template is divided into several modular components to keep your workspace clean:
+\begin{itemize}
+    \item \texttt{main.tex}: The root document where you configure metadata and include other files.
+    \item \texttt{IISERKthesis.cls}: The core LaTeX class file that manages page layout, margins, headers, and frontmatter.
+    \item \texttt{IISERKphysics.sty}: A custom package that loads mathematics tools, defines theorem environments, and configures code blocks.
+    \item \texttt{frontmatter/}: Contains individual files for your abstract, acknowledgements, certificate, and declaration.
+    \item \texttt{chapters/} and \texttt{appendices/}: Directories to house your main textual content.
+\end{itemize}
+
+\section{Metadata Configuration}
+In \texttt{main.tex}, you will find several macros to define your personal details. These automatically populate the title page, declaration, and certificate:
+\begin{minted}{latex}
+\title{Your Thesis Title Here}
+\author{Your Name}
+\rollno{12MS345}
+\program{5th Year BS-MS}
+\department{Department of Physical Sciences}
+\supervisor{Prof. Supervisor Name}
+\end{minted}
+
+\section{Compilation}
+This template relies on \texttt{biber} for bibliography management and \texttt{minted} for syntax-highlighted code blocks. Because of \texttt{minted}, you \emph{must} compile with the \texttt{-shell-escape} flag.
+
+The easiest way to compile is using the included \texttt{.latexmkrc} configuration:
+\begin{minted}{bash}
+latexmk main.tex
+\end{minted}
+This automates multiple compilation passes and stores all auxiliary files (like \texttt{.aux} and \texttt{.log}) neatly in a hidden \texttt{.build\_tex/} folder.
+
+\section{Class Options and Toggles}
+\label{sec:class_options}
+The template automatically generates several lists at the beginning of the document (Table of Contents, List of Figures, List of Tables, List of Listings, Nomenclature, and a Todo list).
+
+You can easily disable any of these by passing toggles to the document class in \texttt{main.tex}:
+\begin{minted}{latex}
+% Disables the Todo list and List of Tables
+\documentclass[notodo, nolot]{IISERKthesis}
+\end{minted}
+
+Available toggles include:
+\begin{itemize}
+    \item \texttt{notodo}: Completely disables the \texttt{todonotes} package and removes the Todo List. Ensure you use this flag for your final submission!
+    \item \texttt{nolof}: Removes the List of Figures.
+    \item \texttt{nolot}: Removes the List of Tables.
+    \item \texttt{nolol}: Removes the List of Listings.
+    \item \texttt{nonom}: Removes the Nomenclature (List of Symbols).
+\end{itemize}

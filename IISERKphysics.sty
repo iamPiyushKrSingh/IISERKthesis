@@ -80,6 +80,7 @@
 \RequirePackage[nameinlink,noabbrev]{cleveref}
 
 % 2. Create a master style to mimic the amsthm inline look
+\providecommand{\@titlefont}{} % Fallback if used outside IISERKthesis
 \tcbset{
   sleekbase/.style 2 args={
       enhanced,
@@ -96,10 +97,10 @@
       left=4pt, right=4pt, top=4pt, bottom=4pt,
       % before skip=12pt, after skip=12pt,
       coltitle=black,
-      fonttitle=\bfseries,
-      description font=\normalfont,
+      fonttitle=\@titlefont\bfseries,
+      description font=\normalfont\@titlefont,
       description delimiters={(}{)},
-      separator sign={.},
+      separator sign={},
       % Body font passed as the second argument
       fontupper=#2,
     }
@@ -131,7 +132,7 @@
 \newtcbtheorem[use counter from=theorem, crefname={remark}{remarks}, Crefname={Remark}{Remarks}]
 {remark}{Remark}{
   sleekbase={gray!60!black}{\normalfont},
-  fonttitle=\itshape
+  fonttitle=\@titlefont\itshape
 }{rem}
 
 
