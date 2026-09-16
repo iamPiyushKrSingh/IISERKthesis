@@ -12,6 +12,8 @@ This template is meticulously optimized for physics and mathematics formatting b
 - **Smart Toggles**: Enable or disable the List of Figures, List of Tables, Nomenclature, List of Listings, and Todo list directly from the `\documentclass` options.
 - **Built-in `todonotes`**: Leave yourself inline or margin notes as you write, which compile into a handy "Todo list" index at the front of the document.
 - **Math & Physics Ready**: Comes pre-loaded with `physics`, `mathtools`, `slashed`, `tensor`, and custom macros (e.g. `\ket`, `\pdv`).
+- **Publication-Grade Figures & Tables**: First-class support for single/multi-panel figures and subtables with `subcaption`, professional horizontal rules with `booktabs`, and automated contextual referencing via `cleveref`.
+- **Smart Citations & Bibliography**: Pre-configured with `biblatex` and `biber` for author-year citations with custom clickable hyperlinks for authors and years via `\textcite` and `\parencite`.
 - **Optimized Compilation**: Stripped down `tcolorbox` library imports and pre-configured for lightning-fast compilation times.
 
 ## 🚀 Quick Start

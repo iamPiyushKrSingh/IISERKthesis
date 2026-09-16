@@ -6,15 +6,16 @@ Welcome to the IISER Kolkata MS and PhD thesis template. This document serves as
 \section{Project Structure}
 The template is divided into several modular components to keep your workspace clean:
 \begin{itemize}
-    \item \texttt{main.tex}: The root document where you configure metadata and include other files.
-    \item \texttt{IISERKthesis.cls}: The core LaTeX class file that manages page layout, margins, headers, and frontmatter.
-    \item \texttt{IISERKphysics.sty}: A custom package that loads mathematics tools, defines theorem environments, and configures code blocks.
-    \item \texttt{frontmatter/}: Contains individual files for your abstract, acknowledgements, certificate, and declaration.
-    \item \texttt{chapters/} and \texttt{appendices/}: Directories to house your main textual content.
+    \item \mintinline{text}{main.tex}: The root document where you configure metadata and include other files.
+    \item \mintinline{text}{IISERKthesis.cls}: The core LaTeX class file that manages page layout, margins, headers, and frontmatter.
+    \item \mintinline{text}{IISERKphysics.sty}: A custom package that loads mathematics tools, defines theorem environments, and configures code blocks.
+    \item \mintinline{text}{frontmatter/}: Contains individual files for your abstract, acknowledgements, certificate, and declaration.
+    \item \mintinline{text}{chapters/} and \mintinline{text}{appendices/}: Directories to house your main textual content.
+    \item \mintinline{text}{references.bib}: BibLaTeX database containing your literature citations.
 \end{itemize}
 
 \section{Metadata Configuration}
-In \texttt{main.tex}, you will find several macros to define your personal details. These automatically populate the title page, declaration, and certificate:
+In \mintinline{text}{main.tex}, you will find several macros to define your personal details. These automatically populate the title page, declaration, and certificate:
 \begin{minted}{latex}
 \title{Your Thesis Title Here}
 \author{Your Name}
@@ -25,19 +26,19 @@ In \texttt{main.tex}, you will find several macros to define your personal detai
 \end{minted}
 
 \section{Compilation}
-This template relies on \texttt{biber} for bibliography management and \texttt{minted} for syntax-highlighted code blocks. Because of \texttt{minted}, you \emph{must} compile with the \texttt{-shell-escape} flag.
+This template relies on \mintinline{text}{biber} for bibliography management and \mintinline{latex}{minted} for syntax-highlighted code blocks. Because of \mintinline{latex}{minted}, you \emph{must} compile with the \mintinline{bash}{-shell-escape} flag.
 
-The easiest way to compile is using the included \texttt{.latexmkrc} configuration:
+The easiest way to compile is using the included \mintinline{text}{.latexmkrc} configuration:
 \begin{minted}{bash}
 latexmk main.tex
 \end{minted}
-This automates multiple compilation passes and stores all auxiliary files (like \texttt{.aux} and \texttt{.log}) neatly in a hidden \texttt{.build\_tex/} folder.
+This automates multiple compilation passes and stores all auxiliary files (like \mintinline{text}{.aux} and \mintinline{text}{.log}) neatly in a hidden \mintinline{text}{.build_tex/} folder.
 
 \section{Class Options and Toggles}
 \label{sec:class_options}
 The template automatically generates several lists at the beginning of the document (Table of Contents, List of Figures, List of Tables, List of Listings, Nomenclature, and a Todo list).
 
-You can easily disable any of these by passing toggles to the document class in \texttt{main.tex}:
+You can easily disable any of these by passing toggles to the document class in \mintinline{text}{main.tex}:
 \begin{minted}{latex}
 % Disables the Todo list and List of Tables
 \documentclass[notodo, nolot]{IISERKthesis}
@@ -45,9 +46,9 @@ You can easily disable any of these by passing toggles to the document class in 
 
 Available toggles include:
 \begin{itemize}
-    \item \texttt{notodo}: Completely disables the \texttt{todonotes} package and removes the Todo List. Ensure you use this flag for your final submission!
-    \item \texttt{nolof}: Removes the List of Figures.
-    \item \texttt{nolot}: Removes the List of Tables.
-    \item \texttt{nolol}: Removes the List of Listings.
-    \item \texttt{nonom}: Removes the Nomenclature (List of Symbols).
+    \item \mintinline{latex}{notodo}: Completely disables the \mintinline{latex}{todonotes} package and removes the Todo List. Ensure you use this flag for your final submission!
+    \item \mintinline{latex}{nolof}: Removes the List of Figures.
+    \item \mintinline{latex}{nolot}: Removes the List of Tables.
+    \item \mintinline{latex}{nolol}: Removes the List of Listings.
+    \item \mintinline{latex}{nonom}: Removes the Nomenclature (List of Symbols).
 \end{itemize}

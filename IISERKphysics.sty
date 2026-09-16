@@ -59,6 +59,13 @@
   xleftmargin=5pt
 }
 
+% Inline code configuration with automatic line breaking
+\setmintedinline{
+  breaklines=true,
+  breakbytoken=true
+}
+\newmintinline[code]{text}{}
+
 % Prevent line numbers from being copied (requires accsupp package)
 \RequirePackage{accsupp}
 \renewcommand{\theFancyVerbLine}{%
@@ -71,6 +78,12 @@
 \renewcommand{\listoflistingscaption}{List of Listings}
 
 
+
+% =====================================================================
+% --- TABLES AND FIGURES (BOOKTABS & SUBCAPTION) ---
+% =====================================================================
+\RequirePackage{booktabs}        % Professional-quality table horizontal rules (\toprule, \midrule, \bottomrule)
+\RequirePackage{subcaption}      % Subfigures and subtables with independent captions and labels
 
 % =====================================================================
 % --- THEOREMS AND DEFINITIONS (TCOLORBOX) ---

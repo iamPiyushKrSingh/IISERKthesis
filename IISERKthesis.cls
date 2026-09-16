@@ -448,13 +448,13 @@
 % --- Acknowledgements Environment ---
 \newenvironment{acknowledgements}{
     \newpage
-    \chapter*{Acknowledgements}
-    \addcontentsline{toc}{chapter}{Acknowledgements}
+    \chapter{Acknowledgements}
+    % \addcontentsline{toc}{chapter}{Acknowledgements}
 }{}
 
 % --- Abstract Environment ---
 \newenvironment{abstract_thesis}{
     \newpage
-    \chapter*{Abstract}
-    \addcontentsline{toc}{chapter}{Abstract}
+    \chapter{Abstract}
+    % \addcontentsline{toc}{chapter}{Abstract}
 }{}

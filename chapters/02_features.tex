@@ -1,10 +1,10 @@
 \chapter{Features and Customization}
 \label{ch:features}
 
-This chapter highlights the advanced typographical features and custom environments built into the \texttt{IISERKphysics.sty} package.
+This chapter highlights the advanced typographical features and custom environments built into the \mintinline{text}{IISERKphysics.sty} package.
 
 \section{Font Customization}
-You can easily switch out the document fonts by using the font macros in \texttt{main.tex}. These macros take an optional LaTeX package name and a styling command.
+You can easily switch out the document fonts by using the font macros in \mintinline{text}{main.tex}. These macros take an optional LaTeX package name and a styling command.
 \begin{minted}{latex}
 % Example: Use 'tgheros' for sans-serif headings, 'tgtermes' for Times main text
 \TitleFont[tgheros]{\sffamily}
@@ -14,7 +14,7 @@ You can easily switch out the document fonts by using the font macros in \texttt
 If you leave these commented out, the template elegantly defaults to Garamond.
 
 \section{Theorem Environments}
-We provide beautifully styled theorem environments powered by \texttt{tcolorbox}. These boxes are fully integrated with \texttt{cleveref} for smart cross-referencing.
+We provide beautifully styled theorem environments powered by \mintinline{latex}{tcolorbox}. These boxes are fully integrated with \mintinline{latex}{cleveref} for smart cross-referencing.
 
 \begin{theorem}{No-Hair Theorem}{nohair}
     Stationary black holes are characterized entirely by mass $M$, charge $Q$, and angular momentum $J$.
@@ -32,23 +32,226 @@ We provide beautifully styled theorem environments powered by \texttt{tcolorbox}
     The term was popularized by John Wheeler in 1967.
 \end{remark}
 
-You can reference these dynamically using \texttt{\textbackslash cref\{\}}: \cref{thm:nohair} and \cref{def:horizon}.
+You can reference these dynamically: use \mintinline{latex}{\cref} for lowercase mid-sentence citations (\cref{thm:nohair} and \cref{def:horizon}) and \mintinline{latex}{\Cref} when opening a sentence (\Cref{thm:nohair} characterizes black hole geometries).
 
 \section{Mathematics and Physics}
-Essential math packages like \texttt{amsmath}, \texttt{mathtools}, \texttt{slashed}, and \texttt{tensor} are pre-loaded. The \texttt{physics} package provides excellent shorthand for bra-ket notation and derivatives:
+Essential math packages like \mintinline{latex}{amsmath}, \mintinline{latex}{mathtools}, \mintinline{latex}{slashed}, and \mintinline{latex}{tensor} are preloaded. The \mintinline{latex}{physics} package provides excellent shorthand for bra-ket notation and derivatives:
 \begin{equation}
     \hat{H} \ket{\Psi} = i\hbar \pdv{t} \ket{\Psi}
+    \label{eq:schrodinger}
 \end{equation}
+\Cref{eq:schrodinger} is the time-dependent Schrödinger equation, which can also be cited mid-sentence as \cref{eq:schrodinger}.
 
 You can also log symbols to the Nomenclature automatically. For instance, consider the speed of light $c$.
 \nomenclature{$c$}{Speed of light in a vacuum}
 \nomenclature{$\ket{\Psi}$}{Quantum state vector}
 
+\section{Citations and Bibliography}
+\label{sec:citations}
+Bibliography management is configured out of the box using \mintinline{latex}{biblatex} with the \mintinline{text}{biber} backend. Citations are stored in \mintinline{text}{references.bib} (registered via \mintinline{latex}{\addbibresource{references.bib}} in \mintinline{text}{main.tex}), and the bibliography is printed at the end of the document with \mintinline{latex}{\printbibliography[heading=bibintoc]}.
+
+The template provides an author-year citation style (\mintinline{latex}{citestyle=authoryear}) paired with a numeric bibliography list (\mintinline{latex}{bibstyle=numeric}). We provide a custom implementation of \mintinline{latex}{\textcite} that links both the author name and the publication year directly to the bibliography entry in dark green (\mintinline{latex}{citecolor}), while keeping parentheses unlinked.
+
+\begin{itemize}
+    \item \textbf{Narrative citation}: Use \mintinline{latex}{\textcite{key}} when the author's name forms a natural part of the sentence:
+          \begin{quote}
+              As formulated by \textcite{einstein1915}, gravitational interactions arise from the curvature of spacetime.
+          \end{quote}
+    \item \textbf{Parenthetical citation}: Use \mintinline{latex}{\parencite{key}} when referring to literature parenthetically:
+          \begin{quote}
+              Gravitational radiation from black hole collisions was analyzed in seminal work \parencite{hawking1971}, extending theorems on gravitational collapse \parencite{penrose1965}.
+          \end{quote}
+    \item \textbf{Multiple citations}: Separate multiple citation keys with commas inside \mintinline{latex}{\parencite{...}}:
+          \begin{quote}
+              Foundational developments in general relativity and singularity formation are well documented \parencite{hawking1971,penrose1965,einstein1915}.
+          \end{quote}
+\end{itemize}
+
+Here is how you write these in your source:
+\begin{minted}{latex}
+% Narrative citation: Einstein (1915)
+As formulated by \textcite{einstein1915}, gravitational interactions...
+
+% Parenthetical citation: (Hawking 1971)
+Gravitational radiation was analyzed in seminal work \parencite{hawking1971}...
+
+% Multiple references: (Hawking 1971; Penrose 1965)
+Foundational developments are well documented \parencite{hawking1971, penrose1965}.
+\end{minted}
+
+\section{Figures and Tables}
+\label{sec:figures_tables}
+The template provides first-class support for single and composite graphics via \mintinline{latex}{graphicx} and \mintinline{latex}{subcaption}, as well as publication-grade tables via \mintinline{latex}{booktabs}. All figures and tables integrate seamlessly with \mintinline{latex}{cleveref} for automatic, contextual referencing.
+
+\subsection{Figures and Subfigures}
+Use the standard \mintinline{latex}{figure} environment for individual graphics, and the \mintinline{latex}{subfigure} environment (provided by \mintinline{latex}{subcaption}) for multi-panel composite figures.
+
+\Cref{fig:single_logo} displays a standalone figure at the beginning of a sentence. In contrast, mid-sentence citations adopt the lowercase form (for example, as illustrated in \cref{fig:single_logo}). When presenting related data or comparisons side-by-side, use subfigures as shown in \cref{fig:institution_logos}. \Cref{fig:institution_logos} groups two institutional insignia under a single caption. You can reference individual panels as \cref{fig:sub_iiserk} and \cref{fig:sub_dps}, cite a combined range as \cref{fig:sub_iiserk,fig:sub_dps}, or begin a sentence with \Cref{fig:sub_iiserk}.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.28\textwidth]{images/logos/IISERKlogo.png}
+    \caption{The official emblem of IISER Kolkata as an example of a single standalone figure.}
+    \label{fig:single_logo}
+\end{figure}
+
+\begin{figure}[htpb]
+    \centering
+    \begin{subfigure}[b]{0.35\textwidth}
+        \centering
+        \includegraphics[width=0.75\textwidth]{images/logos/IISERKlogo.png}
+        \caption{IISER Kolkata emblem.}
+        \label{fig:sub_iiserk}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.35\textwidth}
+        \centering
+        \includegraphics[width=0.75\textwidth]{images/logos/dps_logo.png}
+        \caption{Department of Physical Sciences.}
+        \label{fig:sub_dps}
+    \end{subfigure}
+    \caption{Multi-panel figure example: comparing institutional insignia side-by-side using the \mintinline{latex}{subfigure} environment.}
+    \label{fig:institution_logos}
+\end{figure}
+
+Here is the source code for constructing composite subfigures:
+\begin{minted}{latex}
+\begin{figure}[htpb]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{panel_a.png}
+        \caption{First observation panel.}
+        \label{fig:panel_a}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{panel_b.png}
+        \caption{Second observation panel.}
+        \label{fig:panel_b}
+    \end{subfigure}
+    \caption{Side-by-side composite figure with shared caption.}
+    \label{fig:composite}
+\end{figure}
+\end{minted}
+
+\subsection{Tables and Subtables}
+Avoid vertical lines in scientific tables. The \mintinline{latex}{booktabs} package provides clean horizontal rules: \mintinline{latex}{\toprule}, \mintinline{latex}{\midrule}, and \mintinline{latex}{\bottomrule}. Place the \mintinline{latex}{\caption} \emph{above} the table body, adhering to standard scientific publishing conventions.
+
+\Cref{tab:constants} demonstrates a standard single table. Mid-sentence citations automatically take the lowercase form (for example, as summarized in \cref{tab:constants}). For side-by-side comparison tables, the \mintinline{latex}{subtable} environment groups multiple tables under a common label, as shown in \cref{tab:mechanics}. Individual subtables can be cited mid-sentence as \cref{tab:sub_kinematics} and \cref{tab:sub_dynamics}, or together as \cref{tab:sub_kinematics,tab:sub_dynamics}. At the start of a sentence, use \mintinline{latex}{\Cref} (for instance, ``\Cref{tab:sub_kinematics} presents kinematics'').
+
+\begin{table}[htpb]
+    \centering
+    \caption{Fundamental physical constants in SI units.}
+    \label{tab:constants}
+    \begin{tabular}{llcc}
+        \toprule
+        Quantity                 & Symbol & Value                    & Unit                            \\
+        \midrule
+        Speed of light in vacuum & $c$    & $2.9979 \times 10^8$     & $\mathrm{m\,s^{-1}}$            \\
+        Planck constant          & $h$    & $6.6261 \times 10^{-34}$ & $\mathrm{J\,s}$                 \\
+        Gravitational constant   & $G$    & $6.6743 \times 10^{-11}$ & $\mathrm{m^3\,kg^{-1}\,s^{-2}}$ \\
+        Elementary charge        & $e$    & $1.6022 \times 10^{-19}$ & $\mathrm{C}$                    \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[htpb]
+    \centering
+    \caption{Multi-table comparison of kinematic and dynamic physical quantities.}
+    \label{tab:mechanics}
+    \begin{subtable}[b]{0.45\textwidth}
+        \centering
+        \caption{Kinematic parameters.}
+        \label{tab:sub_kinematics}
+        \begin{tabular}{lcc}
+            \toprule
+            Variable     & Symbol    & SI Unit              \\
+            \midrule
+            Position     & $\vec{x}$ & $\mathrm{m}$         \\
+            Velocity     & $\vec{v}$ & $\mathrm{m\,s^{-1}}$ \\
+            Acceleration & $\vec{a}$ & $\mathrm{m\,s^{-2}}$ \\
+            \bottomrule
+        \end{tabular}
+    \end{subtable}
+    \hfill
+    \begin{subtable}[b]{0.45\textwidth}
+        \centering
+        \caption{Dynamic parameters.}
+        \label{tab:sub_dynamics}
+        \begin{tabular}{lcc}
+            \toprule
+            Variable & Symbol    & SI Unit                  \\
+            \midrule
+            Mass     & $m$       & $\mathrm{kg}$            \\
+            Momentum & $\vec{p}$ & $\mathrm{kg\,m\,s^{-1}}$ \\
+            Force    & $\vec{F}$ & $\mathrm{N}$             \\
+            \bottomrule
+        \end{tabular}
+    \end{subtable}
+\end{table}
+
+Here is how you format multiple side-by-side subtables in your code:
+\begin{minted}{latex}
+\begin{table}[htpb]
+    \centering
+    \caption{Comparison of two related parameter sets.}
+    \label{tab:comparison}
+    \begin{subtable}[b]{0.45\textwidth}
+        \centering
+        \caption{First parameter set.}
+        \label{tab:part_a}
+        \begin{tabular}{lc}
+            \toprule Parameter & Value \\ \midrule A & 1.0 \\ \bottomrule
+        \end{tabular}
+    \end{subtable}
+    \hfill
+    \begin{subtable}[b]{0.45\textwidth}
+        \centering
+        \caption{Second parameter set.}
+        \label{tab:part_b}
+        \begin{tabular}{lc}
+            \toprule Parameter & Value \\ \midrule B & 2.0 \\ \bottomrule
+        \end{tabular}
+    \end{subtable}
+\end{table}
+\end{minted}
+
+\subsection{Context-Based Capitalization Rule}
+\label{sec:cref_capitalization}
+Scientific publishing standards (such as APS, IEEE, and Chicago Manual of Style) prescribe \emph{context-based capitalization} for cross-references:
+\begin{itemize}
+    \item \textbf{Sentence-initial references (\mintinline{latex}{\Cref})}: When opening a sentence, use \mintinline{latex}{\Cref{...}}. It automatically capitalizes the output (e.g., \mintinline{latex}{\Cref{tab:constants}} yields ``\Cref{tab:constants}'').
+    \item \textbf{Mid-sentence references (\mintinline{latex}{\cref})}: Within running text or parentheses, use \mintinline{latex}{\cref{...}}. It automatically preserves lowercase (e.g., \mintinline{latex}{\cref{tab:constants}} yields ``\cref{tab:constants}'').
+\end{itemize}
+
+\Cref{tab:cref_rules} summarizes the context-based output across primary environments.
+
+\begin{table}[htpb]
+    \centering
+    \caption{Context-based capitalization commands provided by \mintinline{latex}{cleveref}.}
+    \label{tab:cref_rules}
+    \begin{tabular}{lcc}
+        \toprule
+        Environment & Sentence Start (\mintinline{latex}{\Cref})                              & Mid-Sentence (\mintinline{latex}{\cref})                                \\
+        \midrule
+        Figure      & \mintinline{latex}{\Cref{fig:...}} $\rightarrow$ \Cref{fig:single_logo} & \mintinline{latex}{\cref{fig:...}} $\rightarrow$ \cref{fig:single_logo} \\
+        Table       & \mintinline{latex}{\Cref{tab:...}} $\rightarrow$ \Cref{tab:constants}   & \mintinline{latex}{\cref{tab:...}} $\rightarrow$ \cref{tab:constants}   \\
+        Equation    & \mintinline{latex}{\Cref{eq:...}} $\rightarrow$ \Cref{eq:schrodinger}   & \mintinline{latex}{\cref{eq:...}} $\rightarrow$ \cref{eq:schrodinger}   \\
+        Theorem     & \mintinline{latex}{\Cref{thm:...}} $\rightarrow$ \Cref{thm:nohair}      & \mintinline{latex}{\cref{thm:...}} $\rightarrow$ \cref{thm:nohair}      \\
+        Section     & \mintinline{latex}{\Cref{sec:...}} $\rightarrow$ \Cref{sec:citations}   & \mintinline{latex}{\cref{sec:...}} $\rightarrow$ \cref{sec:citations}   \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
 \section{Code Listings}
-The template utilizes \texttt{minted} for professional code blocks. Crucially, we use the \texttt{accsupp} package to render line numbers uncopyable, so readers can effortlessly copy your code from the PDF without grabbing the line numbers.
+The template utilizes \mintinline{latex}{minted} for professional code blocks as well as inline code. Crucially, we use the \mintinline{latex}{accsupp} package to render line numbers uncopyable, so readers can effortlessly copy your code from the PDF without grabbing the line numbers.
+
+For inline code, use \mintinline{latex}{\mintinline{<language>}{<code>}} or the shorthand \mintinline{latex}{\code{<code>}}. Inline code is configured with automatic line breaking (\mintinline{latex}{breaklines=true, breakbytoken=true}) so that long file paths, commands, or code tokens wrap automatically according to the text width without overflowing into page margins.
 
 \begin{listing}[htpb]
-\begin{minted}{python}
+    \begin{minted}{python}
 import numpy as np
 
 def calculate_energy(mass):
@@ -56,12 +259,12 @@ def calculate_energy(mass):
     c = 299792458 # m/s
     return mass * c**2
 \end{minted}
-    \caption{A simple Python script demonstrating the \texttt{minted} configuration.}
+    \caption{A simple Python script demonstrating the \mintinline{latex}{minted} configuration.}
     \label{lst:python}
 \end{listing}
 
 \section{To-Do Notes}
-As you draft your thesis, you can leave yourself notes using the \texttt{\textbackslash todo\{\}} command. 
+As you draft your thesis, you can leave yourself notes using the \mintinline{latex}{\todo{}} command.
 \todo{This is a margin note. It automatically fits the page margin.}
 \todo[inline, color=green!40]{This is an inline todo note, useful for longer comments or reminders inside the text body.}
-These notes compile into a handy index at the front of the document. When you are ready to finalize your thesis, simply add the \texttt{notodo} class option (see \cref{sec:class_options}) to hide all notes and the list simultaneously.
+These notes compile into a handy index at the front of the document. When you are ready to finalize your thesis, simply add the \mintinline{latex}{notodo} class option (see \cref{sec:class_options}) to hide all notes and the list simultaneously.

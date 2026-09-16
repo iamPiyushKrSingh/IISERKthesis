@@ -5,3 +5,20 @@ This is an example of an appendix chapter. Appendices automatically use alphabet
 
 \section{Supplementary Information}
 You can include extra derivations, long tables of data, or additional code snippets here that are relevant but too detailed for the main text.
+
+\Cref{tab:supp_calibration} lists supplementary calibration parameters at the beginning of a sentence. Notice how opening a sentence with \mintinline{latex}{\Cref} produces the capitalized form (\Cref{tab:supp_calibration}), while mid-sentence references such as \cref{tab:supp_calibration} preserve lowercase, with both adopting the appendix letter prefix \mintinline{text}{A.1}.
+
+\begin{table}[htpb]
+    \centering
+    \caption{Supplementary detector calibration parameters.}
+    \label{tab:supp_calibration}
+    \begin{tabular}{lccc}
+        \toprule
+        Receiver Channel & Center Frequency (MHz) & Gain (dB) & Noise Temp (K) \\
+        \midrule
+        CH1 (L-Band) & 1420.4 & 45.2 & 32.1 \\
+        CH2 (OH-Line) & 1665.4 & 44.8 & 34.5 \\
+        CH3 (OH-Line) & 1667.3 & 45.0 & 33.8 \\
+        \bottomrule
+    \end{tabular}
+\end{table}

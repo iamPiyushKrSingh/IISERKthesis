@@ -11,6 +11,13 @@
 
 $aux_dir = '.build_tex';  # Directory for auxiliary files
 
+# Ensure subdirectories for \include (e.g. chapters, appendices) exist in $aux_dir
+use File::Path qw(make_path);
+for my $dir (glob('*/')) {
+    $dir =~ s/\/$//;
+    make_path("$aux_dir/$dir") unless $dir =~ /^\./;
+}
+
 $times_are_clock = 1;
 
 # For Preview
