@@ -155,8 +155,12 @@
     \renewcommand{\@textfontstyle}{#2}%
 }
 
-\newcommand{\@mathfont}{} % Default math font package
-\newcommand{\MathFont}[1]{\renewcommand{\@mathfont}{#1}}
+\newcommand{\@mathfontoptions}{}
+\newcommand{\@mathfontpackage}{}
+\newcommand{\MathFont}[2][]{%
+    \renewcommand{\@mathfontoptions}{#1}%
+    \renewcommand{\@mathfontpackage}{#2}%
+}
 
 \AtEndPreamble{
     \ifx\@titlefontpackage\@empty\else
@@ -165,8 +169,12 @@
     \ifx\@textfontpackage\@empty\else
         \RequirePackage{\@textfontpackage}
     \fi
-    \ifx\@mathfont\@empty\else
-        \RequirePackage{\@mathfont}
+    \ifx\@mathfontpackage\@empty\else
+        \ifx\@mathfontoptions\@empty
+            \RequirePackage{\@mathfontpackage}
+        \else
+            \RequirePackage[\@mathfontoptions]{\@mathfontpackage}
+        \fi
     \fi
 }
 

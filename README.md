@@ -61,7 +61,7 @@ You can easily customize the fonts used in your thesis directly in `main.tex` us
 
 - `\TitleFont[<package>]{<command>}`: Changes the font for the title page and chapter/section headings. It optionally accepts a LaTeX font package to load, followed by the font shape/family command to apply. Examples: `\TitleFont{\sffamily}` (just applies sans-serif) or `\TitleFont[tgheros]{\sffamily}` (loads the tgheros package and applies sans-serif).
 - `\TextFont[<package>]{<command>}`: Changes the main text font of the document. Like `\TitleFont`, it accepts an optional font package and a font styling command. The default package is `ebgaramond`. Examples: `\TextFont[tgtermes]{\rmfamily}` or `\TextFont[mathpazo]{}`.
-- `\MathFont{<package>}`: Changes the font used for math equations. This command also **loads a LaTeX font package**. Example: `\MathFont{newtxmath}`.
+- `\MathFont[<options>]{<package>}`: Changes the font used for math equations. This command accepts optional package options followed by a LaTeX math font package to load. Examples: `\MathFont{newtxmath}` or `\MathFont[garamondx]{newtxmath}`.
 
 *Note: If you leave `\TextFont` or `\MathFont` commented out or empty, it will fall back to the template's default settings (Garamond for text).*
 
